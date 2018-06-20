@@ -1,0 +1,25 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 20.06.2018, 11:30:59
+    Author     : Benjamin Letzel
+*/
+
+
+/* remove extra space previously reserved for pseudo content (right/down arrows) */
+/* remove pseudo content (right/down arrows) */
+#menu {
+    ul {
+        li {
+            a {
+                padding-right: 1.5em;
+                &:after {
+                    content: "";
+                }
+            }
+        }
+    }
+}

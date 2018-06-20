@@ -1,0 +1,417 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 20.06.2018, 11:25:41
+    Author     : Benjamin Letzel
+*/
+
+
+/* Released: 1st April 2014 - Beverley Hooton @ Focus on Function Web Design - http://fofwebdesign.co.uk */
+/* Updated: 15th July 2014 - css to correct 'position:fixed' bug in Safari */
+/* Updated: 19th March 2015 - css sub-menu activation simplified [id$="-sub"] - thanks SeanW */
+/* Updated: 26th June 2015 - &#9668; arrows changed to &#9658; and rotated, for Android */
+/* Updated: 17th August 2015 - background added to '#menu li a' to fix intermittent text overlap */
+/* Updated: 15th September 2015 - 'go-up' option added for sub-menus on desktop */
+/* http://timpietrusky.com/advanced-checkbox-hack */
+@-webkit-keyframes androidbugfix {
+    from {
+        padding: 0;
+    }
+    to {
+        padding: 0;
+    }
+}
+/* http://timpietrusky.com/advanced-checkbox-hack */
+/* http://davidwalsh.name/translate3d */
+/* #### - corrects 'unfixing' bug in Safari - uncomment if you have position:fixed elements inside .container - #### */
+/* @media screen and (-webkit-min-device-pixel-ratio:0) { .container { -webkit-transform:none !important } } */
+/* #### - define ids of animated container, menu and sub-menus here - #### */
+/* matches all elements with id ending "-sub" */
+/* #### - switch to desktop menu at 960px (960/16=60 - 16px being default browser font-size) - #### */
+/* fixes bottom padding issue in IE10 */
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    position: relative;
+    background: #222;
+    font: 1em/1.75 Verdana, Arial, Helvetica, sans-serif;
+}
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    position: relative;
+    background: #222;
+    font: 1em/1.75 Verdana, Arial, Helvetica, sans-serif;
+    overflow-x: hidden;
+    -webkit-animation: androidbugfix infinite 1s;
+}
+#header {
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4.0625em;
+    background: #222;
+    label {
+        padding: 0 0.125em;
+        font: 2.875em/1.4375em Arial;
+        &:hover {
+            color: @color_1;
+        }
+    }
+}
+#menu {
+    label {
+        padding: 0 0.25em;
+        font: 3.125em/1.375em Arial;
+        &:hover {
+            color: @color_1;
+        }
+    }
+    .sub-nav {
+        .toggle {
+            padding: 0 0.3125em;
+            font: 2em/2em Arial;
+            top: 0;
+            -webkit-transform: scale(-1,1);
+            -ms-transform: scale(-1,1);
+            transform: scale(-1,1);
+        }
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 13.75em;
+        background: #222;
+        z-index: 9999;
+        left: -13.75em;
+        -webkit-transform: translate(0,0);
+        -ms-transform: translate(0,0);
+        transform: translate(0,0);
+        -webkit-transition: -webkit-transform .25s ease;
+        transition: transform .25s ease;
+        margin-top: -1px;
+        -webkit-transform: translate3d(0,0,0);
+    }
+    .sub-nav-check {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+        &:checked {
+            &~[id$="-sub"] {
+                -webkit-transform: translate(13.75em,0);
+                -ms-transform: translate(13.75em,0);
+                transform: translate(13.75em,0);
+            }
+        }
+    }
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 13.75em;
+    background: #222;
+    z-index: 9999;
+    left: -13.75em;
+    -webkit-transform: translate(0,0);
+    -ms-transform: translate(0,0);
+    transform: translate(0,0);
+    -webkit-transition: -webkit-transform .25s ease;
+    transition: transform .25s ease;
+    -webkit-transform: translate3d(0,0,0);
+    ul {
+        background: #222;
+        line-height: 2.75em;
+        text-decoration: none;
+        padding: 0;
+        list-style: none;
+        margin-top: 4.0625em;
+        border-top: 1px solid #444;
+    }
+    li {
+        border-bottom: 1px solid #444;
+        a {
+            background: #222;
+            display: block;
+            font-size: 0.875em;
+            padding-left: 1.5em;
+            color: @color_2;
+            text-decoration: none;
+            &:hover {
+                background: #333;
+            }
+        }
+    }
+    .toggle-sub {
+        &:hover {
+            background: #333;
+        }
+        font: bold 1em/2.75em Arial;
+        color: @color_2;
+        background: #222;
+        float: right;
+        margin-top: -2.75em;
+        width: 2.25em;
+        border-left: 1px solid #444;
+        cursor: pointer;
+        text-align: center;
+    }
+    .sub-heading {
+        margin-top: 4.0625em;
+        padding-left: 1.3125em;
+        color: @color_3;
+        &:before {
+            content: "";
+            display: block;
+            height: 1px;
+            width: 13.75em;
+            margin-left: -1.3125em;
+            background: #444;
+        }
+    }
+}
+#main-nav-check {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+    &:checked {
+        &~.container {
+            -webkit-transform: translate(13.75em,0);
+            -ms-transform: translate(13.75em,0);
+            transform: translate(13.75em,0);
+        }
+        &~#menu {
+            -webkit-transform: translate(13.75em,0);
+            -ms-transform: translate(13.75em,0);
+            transform: translate(13.75em,0);
+        }
+    }
+}
+.toggle {
+    position: absolute;
+    right: 0.15em;
+    cursor: pointer;
+    color: @color_2;
+}
+.container {
+    background: #fff;
+    min-height: 100%;
+    padding: 0;
+    margin: 0;
+    -webkit-transform: translate(0,0);
+    -ms-transform: translate(0,0);
+    transform: translate(0,0);
+    -webkit-transition: -webkit-transform .25s ease;
+    transition: transform .25s ease;
+    -webkit-transform: translate3d(0,0,0);
+}
+.page-content {
+    padding: 0 1em 1em;
+    max-width: 64em;
+    margin: auto;
+    &:after {
+        display: block;
+        content: "";
+        height: 1px;
+    }
+}
+.breadcrumbs {
+    font-size: .75em;
+    border-bottom: 7px solid #eee;
+    margin: 0 -1.25em 1.5em;
+    padding: 1em 1.25em;
+    span {
+        display: none;
+    }
+}
+a {
+    color: @color_4;
+    &:active {
+        color: @color_4;
+    }
+    &:visited {
+        color: @color_4;
+        color: @color_5;
+    }
+    &:hover {
+        color: @color_6;
+        text-decoration: none;
+    }
+    &:focus {
+        color: @color_6;
+        text-decoration: none;
+    }
+}
+code {
+    display: block;
+    background: #ebebeb;
+    font-size: 0.875em;
+    padding: 1em 2em;
+    overflow-x: scroll;
+    white-space: nowrap;
+}
+@media ( min-width:60em ) {
+    .container {
+        -webkit-transform: translate(0,0) !important;
+        -ms-transform: translate(0,0) !important;
+        transform: translate(0,0) !important;
+    }
+    #menu {
+        -webkit-transform: translate(0,0) !important;
+        -ms-transform: translate(0,0) !important;
+        transform: translate(0,0) !important;
+        left: auto;
+        bottom: auto;
+        height: 0;
+        width: 100%;
+        .sub-nav {
+            -webkit-transform: translate(0,0) !important;
+            -ms-transform: translate(0,0) !important;
+            transform: translate(0,0) !important;
+            display: none;
+        }
+        label {
+            display: none;
+        }
+        .sub-heading {
+            display: none;
+        }
+        >ul {
+            float: right;
+            position: relative;
+            z-index: 1;
+            top: 0.4285em;
+            right: 1em;
+            margin-top: 0;
+            display: inline-table;
+            border-left: 1px solid #444;
+            border-right: 0;
+            font-size: 0.875em;
+        }
+        ul {
+            &:after {
+                content: "";
+                clear: both;
+                display: block;
+            }
+            li {
+                float: left;
+                position: relative;
+                text-align: left;
+                border-right: 1px solid #444;
+                a {
+                    padding: 0.5em 2.5em 0.5em 1.5em;
+                    &:only-child {
+                        padding-right: 1.5em;
+                        &:after {
+                            content: "";
+                        }
+                    }
+                    &:after {
+                        content: "\203A";
+                        position: absolute;
+                        right: 0.5em;
+                        margin-top: -1.5625em;
+                        display: block;
+                        font: 1.5em Arial;
+                        -webkit-transform: rotate(90deg);
+                        -ms-transform: rotate(90deg);
+                        transform: rotate(90deg);
+                    }
+                }
+                &:hover {
+                    >a {
+                        background: #333;
+                        -webkit-transition: background-color .25s ease;
+                        transition: background-color .25s ease;
+                    }
+                    >ul {
+                        display: block;
+                    }
+                }
+            }
+            ul {
+                position: absolute;
+                left: 0;
+                margin-left: -1px;
+                li {
+                    float: inherit;
+                    width: 13.75em;
+                    border-left: 1px solid #444;
+                    a {
+                        padding: 0 1.5em;
+                        &:after {
+                            right: 0.375em;
+                            margin-top: -1.6875em;
+                            -webkit-transform: none;
+                            -ms-transform: none;
+                            transform: none;
+                        }
+                    }
+                }
+                .sub-nav {
+                    float: left;
+                    top: 0;
+                    left: 13.75em;
+                    margin-left: 0;
+                    margin-top: -1px;
+                }
+            }
+            .sub-nav {
+                top: auto;
+                bottom: auto;
+                left: auto;
+                width: auto;
+                margin-top: 0;
+            }
+            .fly-left {
+                ul {
+                    left: -13.75em;
+                    margin-left: -2px;
+                    li {
+                        float: none;
+                    }
+                }
+                a {
+                    &:after {
+                        right: auto;
+                        left: 0.5em;
+                        left: 0.375em;
+                        margin-top: -1.5625em;
+                        -webkit-transform: rotate(-180deg);
+                        -ms-transform: rotate(-180deg);
+                        transform: rotate(-180deg);
+                    }
+                }
+            }
+            .go-up {
+                >ul {
+                    top: auto;
+                    bottom: 0;
+                    margin-bottom: -1px;
+                }
+            }
+        }
+    }
+    #header {
+        label {
+            display: none;
+        }
+    }
+}
+@media (min-width:30em) {
+    .breadcrumbs {
+        line-height: 3.75;
+        padding: 0 1.25em;
+    }
+}
+@media (min-width:60em) {
+    .breadcrumbs {
+        span {
+            display: inline-block;
+        }
+    }
+}
